@@ -17,7 +17,7 @@ Basic Docker setup to enable a quick start for Symfony based projects
 
 Dependencies:
 
-  * [Docker for Mac](https://www.docker.com/community-edition#/download) > 17 must installed to use this setup
+  * [Docker for Mac](https://www.docker.com/community-edition#/download) > 17.04 must installed to use this setup
 
 ## Services exposed
 
