@@ -63,3 +63,6 @@ You'll need to configure your application to use any services you enabled:
 
 ## Credits
 [PHPDocker](https://phpdocker.io/generator)
+
+## License
+[MIT](/LICENSE)
