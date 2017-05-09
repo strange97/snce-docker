@@ -4,8 +4,6 @@ Basic Docker setup to enable a quick start for Symfony based projects
 
 ## TODOs
 
-### Solar System Exploration, 1950s – 1960s
-
 - [x] Basic setup
 - [x] Expose servie
 - [x] Sequel PRO shortcut
