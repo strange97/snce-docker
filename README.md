@@ -44,6 +44,10 @@ You'll need to configure your application to use any services you enabled:
 
 `./open-db` directly opens Sequel PRO, options available using `-h`
 
+## Symfony environment
+
+You can set an env variable in your host machine to decide which application env will be used by the application: `set SYMFONY_ENV=dev` or for `fish` shell `set SYMFONY_ENV dev`
+
 ## Docker compose cheatsheet
 
   * Start containers in the background: `docker-compose up -d`
