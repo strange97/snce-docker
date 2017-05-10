@@ -4,6 +4,7 @@ FROM phpdockerio/php71-fpm:latest
 RUN apt-get update \
     && apt-get -y --no-install-recommends install  php7.1-mysql php-redis php7.1-bcmath php7.1-bz2 php7.1-gd php-imagick php7.1-intl php7.1-mbstring php7.1-soap php-ssh2 php7.1-xsl php-yaml php-xdebug \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
-
+    
+RUN mkdir /var/symfony && chmod -R 777 /var/symfony
 
 WORKDIR "/application"
