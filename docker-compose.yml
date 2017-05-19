@@ -46,7 +46,7 @@ services:
           - SYMFONY_ENV
       volumes:
         - .:/application:cached
-        - ./docker-config/php-fpm/php-ini-overrides.ini:/etc/php/7.1/fpm/conf.d/99-overrides.ini
+        - ./docker-config/php-fpm/php-ini-overrides_${SYMFONY_ENV}.ini:/etc/php/7.1/fpm/conf.d/99-overrides.ini
 
       links:
         - mysql
