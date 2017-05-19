@@ -56,9 +56,9 @@ You can set an env variable in your host machine to decide which application env
   * Kill containers: `docker-compose kill`
   * View container logs: `docker-compose logs`
   * Execute command inside of container: `docker-compose exec SERVICE_NAME COMMAND` where `COMMAND` is whatever you want to run. Examples:
-        * Shell into the PHP container, `docker-compose exec php-fpm bash`
-        * Run symfony console, `docker-compose exec php-fpm bin/console`
-        * Open a mysql shell, `docker-compose exec mysql mysql -uroot -pCHOSEN_ROOT_PASSWORD`
+    * Shell into the PHP container, `docker-compose exec php-fpm bash`
+    * Run symfony console, `docker-compose exec php-fpm bin/console`
+    * Open a mysql shell, `docker-compose exec mysql mysql -uroot -pCHOSEN_ROOT_PASSWORD`
 
 ## Recommendations
 
