@@ -1,0 +1,11 @@
+# Prod override
+
+version: "3.2"
+
+services:
+    webserver:
+        ports:
+         - "80:80"
+    php-fpm:
+          volumes:
+            - ./docker-config/php-fpm/php-ini-overrides.prod.ini:/usr/local/etc/php/conf.d/99-overrides.ini

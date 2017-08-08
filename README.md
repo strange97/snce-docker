@@ -7,10 +7,10 @@ Basic Docker setup to enable a quick start for Symfony based projects
 - [x] Basic setup
 - [x] Expose servie
 - [x] Sequel PRO shortcut
-- [ ] MySQL proper volume mount
-- [ ] Symfony test
+- [x] MySQL proper volume mount
+- [x] Symfony test
 - [ ] eZ Publish test
-- [ ] Sulu test
+- [x] Sulu test
  
 ## How to run
 
@@ -51,6 +51,7 @@ You can set an env variable in your host machine to decide which application env
 ## Docker compose cheatsheet
 
   * Start containers in the background: `docker-compose up -d`
+  * Start containers in the background with a production configuration : `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d`
   * Start containers on the foreground: `docker-compose up`. You will see a stream of logs for every container running.
   * Stop containers: `docker-compose stop`
   * Kill containers: `docker-compose kill`
