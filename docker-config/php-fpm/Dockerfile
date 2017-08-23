@@ -18,7 +18,8 @@ RUN apt-get update && apt-get install -y \
         imagemagick \
         libmagickwand-dev \
 		libicu52 \
-		zlib1g
+		zlib1g \
+		git
 		
 RUN docker-php-ext-configure gd \
     --with-gd \
