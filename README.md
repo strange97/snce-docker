@@ -8,6 +8,7 @@ Basic Docker setup to enable a quick start for Symfony based projects
 - [x] Expose servie
 - [x] Sequel PRO shortcut
 - [x] MySQL proper volume mount
+- [x] xDebug
 - [x] Symfony test
 - [ ] eZ Publish test
 - [x] Sulu test
@@ -16,7 +17,7 @@ Basic Docker setup to enable a quick start for Symfony based projects
 
 Dependencies:
 
-  * [Docker for Mac](https://www.docker.com/community-edition#/download) > 17.04 must installed to use this setup
+  * [Docker for Mac](https://www.docker.com/community-edition#/download) > 17.06 must installed to use this setup
 
 ## Services exposed
 
@@ -44,15 +45,33 @@ You'll need to configure your application to use any services you enabled:
 
 `./open-db` directly opens Sequel PRO, options available using `-h`
 
-## Symfony environment
+## Env variable
 
-You can set an env variable in your host machine to decide which application env will be used by the application: `set SYMFONY_ENV=dev` or for `fish` shell `set SYMFONY_ENV dev`
+an `.env` file is provided with some default settings
+
+```
+SYMFONY_ENV=prod
+XDEBUG=0
+XDEBUG_HOST=
+PHP_TIMEZONE=Europe/Rome
+PHP_DISPLAY_ERRORS=1
+```
+
+### Symfony environment
+
+You can set an env variable in your host machine to decide which application env will be used by the application: `export SYMFONY_ENV=dev`
+
+### Xdebug
+
+xDebug can be enable exporting `XDEBUG` env variable, by default it is disabled.
+
+
 
 ## Docker compose cheatsheet
 
-  * Start containers in the background: `docker-compose up -d`
-  * Start containers in the background with a production configuration : `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d`
-  * Start containers on the foreground: `docker-compose up`. You will see a stream of logs for every container running.
+  * Start containers in background: `docker-compose up -d`
+  * Start containers in background with a production configuration : `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d`
+  * Start containers on foreground: `docker-compose up`. You will see a stream of logs for every container running.
   * Stop containers: `docker-compose stop`
   * Kill containers: `docker-compose kill`
   * View container logs: `docker-compose logs`
@@ -60,6 +79,40 @@ You can set an env variable in your host machine to decide which application env
     * Shell into the PHP container, `docker-compose exec php-fpm bash`
     * Run symfony console, `docker-compose exec php-fpm bin/console`
     * Open a mysql shell, `docker-compose exec mysql mysql -uroot -pCHOSEN_ROOT_PASSWORD`
+
+## PHPStorm remote debug setup
+
+Following this instruction you will be able to debug your application using PHPStorm and Xdebug. This approach require Docker > 17.06 because it relies on a special Mac-only DNS name `docker.for.mac.localhost` which will resolve to the internal IP address used by the host.
+
+### Configure Xdebug port
+
+To start Xdebug must be enabled on the proper port in PHPStorm settings.
+
+![PHPStorm configuration](docs/images/debug-1.png)
+
+### Server configuration
+
+In order to allow connection we need to configure the server where our code is, with `⌘ ,` again, and searching for “server”, we need to add a new one with the symbol "+", set the name we prefer, configure the domain, and the port where our docker container is listen. Then we need to click in the option "Use path mapping …", automatically PHPStorm is going to show the tree directory of our project, in the column "Absolute path on the server" we need to add the path of our project in the container, in our case is `/application`.
+
+**Always use an host name (local.project.com is the configured one) and port 80**
+
+![PHPStorm configuration](docs/images/debug-2.png)
+
+### Debug configuration
+
+Under Run -> Configuration click "+" and create a new `PHP Remote Debug` entry, choose a name and select the server created in the previous step. As Ide Key user `PHPSTORM` (it is already configured in the `xdebug.ini` file). This is the result:
+
+![PHPStorm configuration](docs/images/debug-3.png)
+
+### Listen incominc Xdebug connections
+
+To actually start debugging you have to enable Xdebug connection on PHPStorm. You can use the handy toolbar to do so (selecting your already configured server).
+
+![PHPStorm configuration](docs/images/debug-4.png)
+
+### Happy debug
+
+Refresh your page or re-run your cli script to start debugging.
 
 ## Recommendations
 
