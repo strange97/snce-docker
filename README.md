@@ -121,6 +121,7 @@ Refresh your page or re-run your cli script to start debugging.
 
 ## Credits
 [PHPDocker](https://phpdocker.io/generator)
+[Xdebug with Docker and PHPStorm](https://medium.com/@pablofmorales/xdebug-with-docker-and-phpstorm-786da0d0fad2)
 
 ## License
 [MIT](/LICENSE)
