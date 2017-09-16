@@ -8,7 +8,7 @@ Basic Docker setup to enable a quick start for Symfony based projects
 - [x] Expose servie
 - [x] Sequel PRO shortcut
 - [x] MySQL proper volume mount
-- [x] xDebug
+- [x] Xdebug
 - [x] Symfony test
 - [ ] eZ Publish test
 - [x] Sulu test
