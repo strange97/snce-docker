@@ -17,7 +17,7 @@ Basic Docker setup to enable a quick start for Symfony based projects
 
 Dependencies:
 
-  * [Docker for Mac](https://www.docker.com/community-edition#/download) > 17.06 must installed to use this setup
+  * [Docker for Mac](https://www.docker.com/community-edition#/download) > 17.12 must installed to use this setup
 
 ## Services exposed
 
@@ -80,9 +80,9 @@ xDebug can be enable exporting `XDEBUG` env variable, by default it is disabled.
     * Run symfony console, `docker-compose exec php-fpm bin/console`
     * Open a mysql shell, `docker-compose exec mysql mysql -uroot -pCHOSEN_ROOT_PASSWORD`
 
-## PHPStorm remote debug setup
+## PHPStorm remote debug setup (on macOS)
 
-Following this instruction you will be able to debug your application using PHPStorm and Xdebug. This approach require Docker > 17.06 because it relies on a special Mac-only DNS name `docker.for.mac.localhost` which will resolve to the internal IP address used by the host.
+Following this instruction you will be able to debug your application using PHPStorm and Xdebug. This approach require Docker > 17.06 because it relies on a special Mac-only DNS name `docker.for.mac.host.internal` which will resolve to the internal IP address used by the host.
 
 ### Configure Xdebug port
 

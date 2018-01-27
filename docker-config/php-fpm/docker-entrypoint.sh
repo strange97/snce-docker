@@ -18,7 +18,7 @@ then
 
     # else if check if is Docker for Mac
     if [ -z "$HOST" ]; then
-        HOST=`getent hosts docker.for.mac.localhost | awk '{ print $1 }'`
+        HOST=`getent hosts docker.for.mac.host.internal | awk '{ print $1 }'`
     fi
 
     # else get host ip
