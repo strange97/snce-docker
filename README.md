@@ -82,7 +82,7 @@ xDebug can be enable exporting `XDEBUG` env variable, by default it is disabled.
 
 ## PHPStorm remote debug setup (on macOS)
 
-Following this instruction you will be able to debug your application using PHPStorm and Xdebug. This approach require Docker > 17.06 because it relies on a special Mac-only DNS name `docker.for.mac.host.internal` which will resolve to the internal IP address used by the host.
+Following this instruction you will be able to debug your application using PHPStorm and Xdebug. This approach require Docker > 18.03 because it relies on a special Mac-only DNS name `host.docker.internal` which will resolve to the internal IP address used by the host.
 
 ### Configure Xdebug port
 
