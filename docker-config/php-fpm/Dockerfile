@@ -1,4 +1,4 @@
-FROM php:7.1-fpm
+FROM php:7.2-fpm
 
 ARG xdebug=1
 
@@ -40,11 +40,11 @@ RUN docker-php-ext-install -j$(nproc) iconv pdo_mysql bcmath bz2 intl mbstring s
 
 RUN pecl install redis \
     && pecl install imagick \
-    && pecl install mcrypt-1.0.0 \
+    && pecl install mcrypt-1.0.1 \
     && docker-php-ext-enable redis imagick mcrypt
 
 # Install XDebug
-RUN pecl install xdebug-2.5.0 \
+RUN pecl install xdebug-2.6.0 \
     && docker-php-ext-enable xdebug \
     && echo "xdebug.idekey = PHPSTORM" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled \
     && echo "xdebug.default_enable = 1" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled \
