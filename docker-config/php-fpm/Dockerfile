@@ -1,29 +1,32 @@
-FROM php:7.1-fpm
+FROM php:7.2-fpm
 
 ARG xdebug=1
+
+# Workaround for java install error
+# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=863199
+RUN mkdir -p /usr/share/man/man1
 
 # Install selected extensions and other stuff
 
 RUN apt-get update && apt-get install -y \
-		apt-utils \
-        libfreetype6-dev \
-		libjpeg-dev \
-		libpng12-dev \
-        libjpeg62-turbo-dev \
-        libmcrypt-dev \
-        libpng12-dev \
-        libyaml-dev \
-        libbz2-dev \
-        libicu-dev \
-        libxml2-dev \
-        libxslt-dev \
-        imagemagick \
-        libmagickwand-dev \
-		libicu52 \
-		zlib1g \
-		git \
-		unzip \
-		default-jre
+    apt-utils \
+    libfreetype6-dev \
+    libjpeg-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    imagemagick \
+    libmagickwand-dev \
+    libmcrypt-dev \
+    libbz2-dev \
+    zlib1g \
+    unzip \
+    libyaml-dev \
+    libxml2-dev \
+    libicu-dev \
+    libicu57 \
+    libxslt-dev \
+    git \
+    default-jre
 
 RUN docker-php-ext-configure gd \
     --with-gd \
@@ -32,28 +35,29 @@ RUN docker-php-ext-configure gd \
     --with-jpeg-dir=/usr/include/ && \
   NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
   docker-php-ext-install -j${NPROC} gd
-  
-RUN docker-php-ext-install -j$(nproc) iconv mcrypt pdo_mysql bcmath bz2 intl mbstring soap xsl zip opcache
+
+RUN docker-php-ext-install -j$(nproc) iconv pdo_mysql bcmath bz2 intl mbstring soap xsl zip opcache
 
 RUN pecl install redis \
-        && pecl install imagick \
-        && docker-php-ext-enable redis imagick
+    && pecl install imagick \
+    && pecl install mcrypt-1.0.1 \
+    && docker-php-ext-enable redis imagick mcrypt
 
 # Install XDebug
-RUN pecl install xdebug-2.5.0 \
-        && docker-php-ext-enable xdebug \
-        && echo "xdebug.idekey = PHPSTORM" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled \
-        && echo "xdebug.default_enable = 1" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled \
-        && echo "xdebug.remote_enable = 1" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled \
-        && echo "xdebug.remote_autostart = 1" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled \
-        && echo "xdebug.remote_connect_back = 0" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled \
-        && echo "xdebug.profiler_enable = 1" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled \
-        && echo "xdebug.remote_log='/tmp/xdebug.log'" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled \
-        && echo "xdebug.remote_host = 127.0.0.1" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled \
-        && echo "xdebug.remote_port = 9009" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled
+RUN pecl install xdebug-2.6.0 \
+    && docker-php-ext-enable xdebug \
+    && echo "xdebug.idekey = PHPSTORM" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled \
+    && echo "xdebug.default_enable = 1" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled \
+    && echo "xdebug.remote_enable = 1" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled \
+    && echo "xdebug.remote_autostart = 1" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled \
+    && echo "xdebug.remote_connect_back = 0" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled \
+    && echo "xdebug.profiler_enable = 1" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled \
+    && echo "xdebug.remote_log='/tmp/xdebug.log'" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled \
+    && echo "xdebug.remote_host = 127.0.0.1" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled \
+    && echo "xdebug.remote_port = 9009" >> /usr/local/etc/php/conf.d/xdebug.ini.disabled
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-    
+
 RUN apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 RUN mkdir -p /usr/local/bin \
