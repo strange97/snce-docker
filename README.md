@@ -5,7 +5,7 @@ Basic Docker setup to enable a quick start for Symfony based projects
 ## TODOs
 
 - [x] Basic setup
-- [x] Expose servie
+- [x] Expose services
 - [x] Sequel PRO shortcut
 - [x] MySQL proper volume mount
 - [x] Xdebug
@@ -18,6 +18,9 @@ Basic Docker setup to enable a quick start for Symfony based projects
 Dependencies:
 
   * [Docker for Mac](https://www.docker.com/community-edition#/download) > 17.12 must installed to use this setup
+  * PHP + Composer
+  
+run `composer install` to setup the Symfony Application 
 
 ## Services exposed
 
