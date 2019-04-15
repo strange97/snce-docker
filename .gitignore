@@ -6,6 +6,11 @@
 /composer.phar
 /vendor
 
+# symfony
+*.lock
+/bin
+/var
+
 # IDEs
 /.idea
 *.iml
